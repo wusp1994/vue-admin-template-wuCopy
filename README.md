@@ -79,6 +79,12 @@ npm run lint -- --fix
 
 更多信息请参考 [使用文档](https://panjiachen.github.io/vue-element-admin-site/zh/)
 
+
+
+## vuex
+
+vuex中的store分模块管理，需要在store的index.js中引入各个模块，为了解决不同模块命名冲突的问题，将不同模块的namespaced:true，之后在不同页面中引入getter、actions、mutations时，需要加上所属的模块名
+
 ## 目录说明
 
 ```markdown
@@ -216,7 +222,7 @@ D:\WuWorkSpace\code\gitProject\vue-admin-template
 |  ├─mock-server.js
 |  ├─table.js
 |  └user.js
-├─build
+├─build                        //自行编写的node运行文件,比如preview功能
 |   └index.js
 ```
 
