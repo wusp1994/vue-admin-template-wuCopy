@@ -28,6 +28,8 @@ if (process.env.NODE_ENV === 'production') {
   mockXHR()
 }
 
+Vue.prototype.$bus = new Vue
+
 // 将ElementUI设置为英文
 // Vue.use(ElementUI, { locale })
 
