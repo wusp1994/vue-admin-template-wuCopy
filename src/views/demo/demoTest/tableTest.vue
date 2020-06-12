@@ -1,113 +1,51 @@
 <template>
-  <div>
-    <!--超出部分隐藏,显示 tooltip-->
-    <el-table
-      ref="multipleTable"
-      :data="tableData"
-      border
-      tooltip-effect="dark"
-      style="width: 100%"
-      @selection-change="handleSelectionChange">
-      <el-table-column
-        type="selection"
-        width="55" fixed="left">
-      </el-table-column>
-      <el-table-column
-        type="index"
-        width="70"
-        align="center"
-        label="序號"
-        fixed="left">
-      </el-table-column>
-      <el-table-column
-        show-overflow-tooltip
-        prop="date"
-        label="日期"
-        width="120">
-        <!--        <template slot-scope="scope">-->
-        <!--          <el-tooltip class="item" effect="dark" content="Top Left 提示文字" placement="top-start">-->
-        <!--            {{ scope.row.date }}-->
-        <!--          </el-tooltip>-->
-        <!--        </template>-->
-      </el-table-column>
-      <el-table-column
-        prop="name"
-        label="姓名"
-        width="120">
-      </el-table-column>
-      <el-table-column
-        prop="address"
-        label="地址"
-        show-overflow-tooltip>
-      </el-table-column>
-      <el-table-column
-        label="测试表格tooltip">
-        <template slot-scope="scope">
-          <el-tooltip class="item" effect="dark" :content="scope.row.address" placement="top-start">
-              <span>
-                {{ scope.row.address }}
-              </span>
-          </el-tooltip>
-        </template>
-      </el-table-column>
-    </el-table>
-    <div style="margin-top: 20px">
-      <el-button @click="toggleSelection([tableData[1], tableData[2]])">切换第二、第三行的选中状态</el-button>
-      <el-button @click="toggleSelection()">取消选择</el-button>
-    </div>
+  <div class="tableTest">
+    <el-tabs v-model="activeName" @tab-click="handleClick">
+      <el-tab-pane label="多选表格&tooltip" name="first">
+        <tableCheckbox>
+        </tableCheckbox>
+      </el-tab-pane>
+      <el-tab-pane label="展开行表格" name="second">
+        <tableExpand ref="tableExpand">
+        </tableExpand>
+      </el-tab-pane>
+      <el-tab-pane label="树形表格" name="third">
+        <tableTree ref="tableTree">
+        </tableTree>
+      </el-tab-pane>
+      <el-tab-pane label="定时任务补偿" name="fourth">
+      </el-tab-pane>
+    </el-tabs>
   </div>
 
 </template>
 
 <script>
+    import tableExpand from "./tableExpand";
+    import tableTree from "./tableTree";
+    import tableCheckbox from "./tableCheckbox";
+
     export default {
+        name:'tableTest',
+        components: {
+            tableExpand,
+            tableTree,
+            tableCheckbox
+        },
         data() {
             return {
-                tableData: [{
-                    date: '2016-05-03',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-02',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-04',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-08',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-06',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-07',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }],
-                multipleSelection: []
+                activeName: 'first'
             }
         },
         methods: {
-            toggleSelection(rows) {
-                if (rows) {
-                    rows.forEach(row => {
-                        this.$refs.multipleTable.toggleRowSelection(row);
-                    });
-                } else {
-                    this.$refs.multipleTable.clearSelection();
-                }
-            },
-            handleSelectionChange(val) {
-                this.multipleSelection = val;
+            handleClick(tab, event) {
+                console.log(tab, event);
             }
         }
     }
 </script>
+<style>
+  .tableTest{
+    padding: 10px 20px;
+  }
+</style>
