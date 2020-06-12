@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!--超出部分隐藏,显示 tooltip-->
     <el-table
       ref="multipleTable"
       :data="tableData"
@@ -94,7 +95,6 @@
                 multipleSelection: []
             }
         },
-
         methods: {
             toggleSelection(rows) {
                 if (rows) {
