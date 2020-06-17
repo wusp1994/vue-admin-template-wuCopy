@@ -13,7 +13,13 @@
         <tableTree ref="tableTree">
         </tableTree>
       </el-tab-pane>
-      <el-tab-pane label="定时任务补偿" name="fourth">
+      <el-tab-pane label="单选/多选" name="fourth">
+        <el-checkbox v-model="checked.name" :true-label="name" @change="handleChange">备选项</el-checkbox>
+        <el-radio-group v-model="checked.name">
+          <el-radio :label="name">备选项</el-radio>
+          <el-radio :label="6">备选项</el-radio>
+          <el-radio :label="9">备选项</el-radio>
+        </el-radio-group>
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -34,12 +40,21 @@
         },
         data() {
             return {
-                activeName: 'first'
+                activeName: 'first',
+                checked: {
+                    name:'1111'
+                },
+                name: '1111',
+                radio: 3
             }
         },
         methods: {
             handleClick(tab, event) {
                 console.log(tab, event);
+            },
+            handleChange(newVal){
+                console.log(this.checked)
+                console.log(newVal)
             }
         }
     }

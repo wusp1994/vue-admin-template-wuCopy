@@ -21,17 +21,20 @@
         width="180">
       </el-table-column>
       <el-table-column
-        prop="name"
         label="姓名"
         sortable
         width="180">
+        <template slot-scope="scope">
+          <div class="nameWu">
+            {{scope.row.name}}
+          </div>
+        </template>
       </el-table-column>
       <el-table-column
         prop="address"
         label="地址">
       </el-table-column>
     </el-table>
-
     树形数据懒加载
     <p class="doc-tip">
       设置 Table 的 lazy 属性为 true 与加载函数 load 。通过指定 row 中的 hasChildren 字段来指定哪些行是包含子节点。
@@ -84,20 +87,7 @@
             load(row, treeNode, resolve) {
                 console.log(row,'tree', treeNode,'treeNode', resolve,'resolve')
                 setTimeout(() => {
-                    resolve([
-                        {
-                            id: 31,
-                            date: '2016-05-01',
-                            name: '王小虎',
-                            address: '上海市普陀区金沙江路 1519 弄'
-                        },
-                        {
-                            id: 32,
-                            date: '2016-05-01',
-                            name: '王小虎',
-                            address: '上海市普陀区金沙江路 1519 弄'
-                        }
-                    ])
+                    resolve(row.children)
                 }, 1000)
             }
         },
