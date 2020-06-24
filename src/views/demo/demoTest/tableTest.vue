@@ -20,6 +20,12 @@
           <el-radio :label="6">备选项</el-radio>
           <el-radio :label="9">备选项</el-radio>
         </el-radio-group>
+        <autocomplete ref="autocomplete">
+        </autocomplete>
+      </el-tab-pane>
+      <el-tab-pane label="日期" name="five">
+        <datePick>
+        </datePick>
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -30,13 +36,16 @@
     import tableExpand from "./tableExpand";
     import tableTree from "./tableTree";
     import tableCheckbox from "./tableCheckbox";
-
+    import autocomplete from "./autocomplete";
+    import datePick from "./datePick";
     export default {
         name:'tableTest',
         components: {
             tableExpand,
             tableTree,
-            tableCheckbox
+            tableCheckbox,
+            autocomplete,
+            datePick
         },
         data() {
             return {
