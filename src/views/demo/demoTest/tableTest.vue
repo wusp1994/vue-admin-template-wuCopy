@@ -38,6 +38,7 @@
     import tableCheckbox from "./tableCheckbox";
     import autocomplete from "./autocomplete";
     import datePick from "./datePick";
+
     export default {
         name:'tableTest',
         components: {
