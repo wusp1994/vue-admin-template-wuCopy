@@ -54,7 +54,7 @@
       :data="tableData1"
       @expand-change="handleExpandChange"
       style="width: 100%">
-      <el-table-column type="expand">
+      <el-table-column fixed type="expand">
         <template v-if="props.row.currentChildren.length !== 0" slot-scope="props">
           <div class="twoLevel-table">
             <el-table
@@ -62,11 +62,13 @@
               :key="props.row.id"
               style="width: 100%">
               <el-table-column
+                fixed
                 prop="id"
                 label="id"
                 width="180">
               </el-table-column>
               <el-table-column
+                fixed
                 prop="date"
                 label="日期"
                 width="180">
@@ -85,6 +87,7 @@
             </el-table>
             <div class="loading"
                  v-if="props.row.total > props.row.currentChildren.length"
+                 v-loading="twoLevelLoading"
                  @click="loadingMore(props.row,props.$index)">
               点击加载更多
             </div>
@@ -96,6 +99,12 @@
         </template>
       </el-table-column>
       <el-table-column
+        prop="name"
+        fixed
+        label="姓名"
+        width="180">
+      </el-table-column>
+      <el-table-column
         prop="id"
         label="id"
         width="180">
@@ -103,11 +112,6 @@
       <el-table-column
         prop="date"
         label="日期"
-        width="180">
-      </el-table-column>
-      <el-table-column
-        prop="name"
-        label="姓名"
         width="180">
       </el-table-column>
       <el-table-column
@@ -163,7 +167,7 @@
                         shopId: '10333'
                     }],
                 tableData1: [...tableDataTree],
-
+                twoLevelLoading: false,
             }
         },
         mounted() {
@@ -201,7 +205,8 @@
              * @param $index
              */
             loadingMore(row,$index){
-                let { children,pageSize,pageCount,total } = row
+                this.twoLevelLoading = true;
+                let { children,pageSize,pageCount,total } = row;
                 row.currentPage +=1;
                 let end = row.currentPage * pageSize;
                 if(row.currentPage === pageCount){//最后一页
@@ -217,8 +222,11 @@
                 }
                 console.log(this.tableData1,"tableData1")
                 this.$set(this.tableData1,$index,row);//vue不能检测到数组更新,需要手动set
+                setTimeout(()=>{
+                  this.twoLevelLoading = false;
+                },500)
                 this.$nextTick(()=>{
-                    this.$refs['table_expand'].toggleRowExpansion(row, true)//设置展开
+                  this.$refs['table_expand'].toggleRowExpansion(row, true)//设置展开
                 })
             },
             handleExpend(row){

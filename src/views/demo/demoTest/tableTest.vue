@@ -33,44 +33,44 @@
 </template>
 
 <script>
-    import tableExpand from "./tableExpand";
-    import tableTree from "./tableTree";
-    import tableCheckbox from "./tableCheckbox";
-    import autocomplete from "./autocomplete";
-    import datePick from "./datePick";
+  import tableExpand from "./tableExpand";
+  import tableTree from "./tableTree";
+  import tableCheckbox from "./tableCheckbox";
+  import autocomplete from "./autocomplete";
+  import datePick from "./datePick";
 
-    export default {
-        name:'tableTest',
-        components: {
-            tableExpand,
-            tableTree,
-            tableCheckbox,
-            autocomplete,
-            datePick
+  export default {
+    name: 'tableTest',
+    components: {
+      tableExpand,
+      tableTree,
+      tableCheckbox,
+      autocomplete,
+      datePick
+    },
+    data() {
+      return {
+        activeName: 'first',
+        checked: {
+          name: '1111'
         },
-        data() {
-            return {
-                activeName: 'first',
-                checked: {
-                    name:'1111'
-                },
-                name: '1111',
-                radio: 3
-            }
-        },
-        methods: {
-            handleClick(tab, event) {
-                console.log(tab, event);
-            },
-            handleChange(newVal){
-                console.log(this.checked)
-                console.log(newVal)
-            }
-        }
+        name: '1111',
+        radio: 3
+      }
+    },
+    methods: {
+      handleClick(tab, event) {
+        console.log(tab, event);
+      },
+      handleChange(newVal) {
+        console.log(this.checked)
+        console.log(newVal)
+      }
     }
+  }
 </script>
 <style>
-  .tableTest{
+  .tableTest {
     padding: 10px 20px;
   }
 </style>
